@@ -1,0 +1,54 @@
+<?php
+session_start();
+if(isset($_SESSION['logstatus'])){
+	if($_SESSION['logstatus']=='NO'){
+		header('location:http://localhost/FoodSite/Login.php');
+	}
+	else{
+		$n1=$_POST['pizza'];
+		$n2=$_POST['sandwich'];
+		$n3=$_POST['dosa'];
+		$n4=$_POST['kulche'];
+		$n5=$_POST['chowmein'];
+		$n6=$_POST['macroni'];
+		$n7=$_POST['pasta'];
+		$n8=$_POST['manchurian'];
+		$n9=$_POST['coldcoffee'];
+		$n10=$_POST['colddrink'];
+		$n11=$_POST['sweet'];
+		$n12=$_POST['icecream'];
+		if($n1=='')
+			$n1=0;
+		if($n2=='')
+			$n2=0;
+		if($n3=='')
+			$n3=0;
+		if($n4=='')
+			$n4=0;
+		if($n5=='')
+			$n5=0;
+		if($n6=='')
+			$n6=0;
+		if($n7=='')
+			$n7=0;
+		if($n8=='')
+			$n8=0;
+		if($n9=='')
+			$n9=0;
+		if($n10=='')
+			$n10=0;
+		if($n11=='')
+			$n11=0;
+		if($n12=='')
+			$n12=0;
+		$con=mysqli_connect('localhost','root','123456789');
+		mysqli_select_db($con,'Food');
+		$query='update cart set pizza='.$n1.',sandwich='.$n2.',dosa='.$n3.',kulche='.$n4.',chowmein='.$n5.',macroni='.$n6.',pasta='.$n7.',manchurian='.$n8.',coldcoffee='.$n9.',colddrink='.$n10.',sweet='.$n11.',icecream='.$n12.' where username="'.$_SESSION['username'].'"';
+		$res=mysqli_query($con,$query);
+		header('location:http://localhost/FoodSite/Cart.php');
+	}
+}
+else{
+	header('location:http://localhost/FoodSite/MenuCard.php');
+}
+?>
